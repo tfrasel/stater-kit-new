@@ -1,0 +1,15 @@
+---
+import Base from "@/layouts/Base.astro";
+import { getListPage } from "@/lib/contentParser.astro";
+import AgentFlowHero from "@/components/agentflow/AgentFlowHero.astro";
+
+const agentflow = await getListPage("agentflow", "-index");
+const { banner, dashboard } = agentflow.data;
+---
+
+<Base>
+  <div class="relative w-full h-full min-h-screen bg-black overflow-hidden font-['Inter',sans-serif]">
+    <!-- AgentFlow specific content loaded here -->
+    <AgentFlowHero banner={banner} dashboard={dashboard} />
+  </div>
+</Base>

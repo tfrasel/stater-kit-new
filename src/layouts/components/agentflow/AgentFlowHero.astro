@@ -1,0 +1,64 @@
+---
+import MissionControlMockup from "./MissionControlMockup.astro";
+
+const { banner, dashboard } = Astro.props;
+---
+
+<div class="relative w-full overflow-hidden bg-[#0a0a0a] pt-24 text-white font-['Inter',sans-serif]">
+  <!-- Light beam background effects -->
+  <div class="absolute top-[10%] left-1/2 -translate-x-1/2 w-full max-w-2xl h-[600px] flex justify-center items-center pointer-events-none mix-blend-screen opacity-60">
+    <div class="absolute w-[30px] h-[400px] bg-gradient-to-b from-transparent to-[#15ffab] blur-[25px] opacity-80 rounded-full"></div>
+    <div class="absolute w-[200px] h-[300px] bg-[#15ffab] blur-[140px] opacity-30 rounded-full"></div>
+  </div>
+
+  <!-- Header Content -->
+  <div class="relative z-10 flex flex-col items-center mt-12 px-4 md:px-8 max-w-[1000px] mx-auto">
+    <!-- Tagline -->
+    <div class="border border-[#075e54] bg-[rgba(1,1,2,0.8)] backdrop-blur-md rounded-full px-4 py-2 flex items-center gap-2 mb-8 shadow-[inset_0_0_20px_rgba(0,40,20,0.8)]">
+      <div class="w-5 h-5 bg-[#15ffab]/10 rounded flex items-center justify-center">
+         <span class="text-[#15ffab] text-xs">❈</span>
+      </div>
+      <span class="text-sm font-medium tracking-wide text-gray-200">{banner.tagline}</span>
+    </div>
+
+    <!-- Titles -->
+    <h1 class="text-5xl md:text-[72px] font-bold text-center leading-[1.1] mb-6 tracking-tight font-['Instrument_Sans',sans-serif]">
+      {banner.title.split('That')[0]} <br />That
+      {banner.title.split('That')[1]}
+    </h1>
+    <p class="text-lg md:text-xl text-gray-400 text-center max-w-3xl mb-12">
+      {banner.content}
+    </p>
+
+    <!-- Buttons -->
+    <div class="flex flex-col sm:flex-row items-center gap-5">
+      {banner.buttons.map((btn: any) => (
+        <a 
+          href={btn.link} 
+          class={`px-8 py-4 rounded-xl font-medium transition-all hover:-translate-y-1 hover:shadow-lg flex items-center justify-center gap-2 ${
+            btn.primary 
+              ? 'bg-[#15ffab] text-black shadow-[0_0_40px_rgba(21,255,171,0.2)] hover:shadow-[0_0_60px_rgba(21,255,171,0.4)]' 
+              : 'border border-gray-600 bg-white/5 hover:bg-white/10 text-white'
+          }`}
+        >
+          {btn.primary ? (
+            <>
+              {btn.label}
+              <svg class="w-4 h-4 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"></path></svg>
+            </>
+          ) : (
+            <>
+              <svg class="w-4 h-4 mr-1 text-gray-400" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>
+              {btn.label}
+            </>
+          )}
+        </a>
+      ))}
+    </div>
+  </div>
+
+  <!-- Mission Control App Mockup -->
+  <div class="relative z-10 w-full max-w-[1250px] mx-auto mt-20 mb-32 px-4 md:px-6">
+    <MissionControlMockup dashboard={dashboard} />
+  </div>
+</div>
